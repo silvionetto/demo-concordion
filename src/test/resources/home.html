@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="text/html"/>
+    <title>Concordion Demo</title>
+</head>
+<body>
+<p>The name
+    <span concordion:set="#name">Jane Smith</span>
+    will be used in the
+    <span concordion:execute="#result = greeting(#name)">greeting.</span>
+</p>
+<p>The result should be <span concordion:assert-equals="#result">Hello Jane Smith</span></p>
+</body>
+</html>
