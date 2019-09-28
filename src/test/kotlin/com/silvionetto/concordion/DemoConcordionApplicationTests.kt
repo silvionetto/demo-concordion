@@ -1,22 +1,37 @@
 package com.silvionetto.concordion
 
-import junit.framework.TestCase.assertEquals
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
+import org.springframework.test.context.ContextConfiguration
 
-@RunWith(SpringRunner::class)
-@SpringBootTest
+
+@RunWith(SpringConcordionRunner::class)
+@ContextConfiguration(classes = arrayOf(DemoConcordionApplication::class, MyComponent::class))
 class DemoConcordionApplicationTests {
+
+    @Configuration
+    @ComponentScan("com.silvionetto.concordion")
+    class Config {
+
+        @Bean
+        fun component(): MyComponent {
+            return MyComponent()
+        }
+    }
 
     @Autowired
     lateinit var myComponent: MyComponent
 
-    @Test
-    fun contextLoads() {
-        assertEquals("Hello World", myComponent.helloWorld())
+    fun greeting(): String {
+        return myComponent.helloWorld()
     }
+
+    fun greeting(name: String): String {
+        return myComponent.helloWorld(name)
+    }
+
 
 }
